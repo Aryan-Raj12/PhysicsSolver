@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+
+   <div>
+       <p>Force Solver: F = ma </p>
+       <select id="choose3">
+           <option value="f">Force (f)</option>
+           <option value="m">Mass (m)</option>
+           <option value="a">Acceleration (a)</option>
+       </select>
+       <input type="number" id="f3" placeholder="Force">
+       <input type="number" id="m3" placeholder="Mass">
+       <input type="number" id="a3" placeholder="acceleration">
+       <button onclick="solveThirdEquation()">SOLVE</button>
+       <div id="answer3"></div>
+       <canvas id="forceChart" width="550" height="350"></canvas>
+       <button onclick="downloadChart('forceChart')"> Download Chart</button>
+   </div>
+
+
+   <script src="equation.js"></script>
+
+   <script>
+    function downloadChart(chartId) {
+   const chartCanvas = document.getElementById(chartId);
+   const imageLink = document.createElement('a');
+   imageLink.href = chartCanvas.toDataURL('image/png'); // Convert to base64 image URL
+   imageLink.download = chartId + '.png';
+   imageLink.click(); // Trigger download
+    }
+
+
+   </script>
+  
+</body>
+</html>

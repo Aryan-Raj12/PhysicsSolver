@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+   <style>
+
+    
+   </style>
+</head>
+<body>
+    
+
+
+   <div>
+       <p>Energy Solver: KE = 1/2*m*v^2 </p>
+       <select id="choose4">
+           <option value="f">Kinetic energy (KE)</option>
+           <option value="m">Mass (m)</option>
+           <option value="a">Velocity (v)</option>
+       </select>
+       <input type="number" id="ke4" placeholder="KE">
+       <input type="number" id="m4" placeholder="Mass">
+       <input type="number" id="v4" placeholder="velocity">
+       <button onclick="solveFourthEquation()">SOLVE</button>
+       <div id="answer4"></div>
+       <canvas class="graphs" id="kineticEnergyChart" width="550" height="350"></canvas>
+       <button onclick="downloadChart('kineticEnergyChart')"> Download Chart</button>
+   </div>
+
+
+   <div>
+       <p>Energy Solver: PE = mgh </p>
+       <select id="choose4">
+           <option value="f">Potential energy (PE)</option>
+           <option value="m">Mass (m)</option>
+           <option value="a">Height (h)</option>
+          
+       </select>
+       <input type="number" id="pe5" placeholder="PE">
+       <input type="number" id="m5" placeholder="Mass">
+       <input type="number" id="h5" placeholder="height">
+       <input type="number" id="g5" placeholder="Gravitational Acceleration ">
+       <button onclick="solveFifthEquation()">SOLVE</button>
+       <div id="answer5"></div>
+       <canvas class="graphs" id="potentialEnergyChart" width="550" height="350"></canvas>
+       <button onclick="downloadChart('potentialEnergyChart')"> Download Chart</button>
+   </div>
+
+
+
+
+
+
+   <script src="equation.js"></script>
+
+   <script>
+    function downloadChart(chartId) {
+   const chartCanvas = document.getElementById(chartId);
+   const imageLink = document.createElement('a');
+   imageLink.href = chartCanvas.toDataURL('image/png'); // Convert to base64 image URL
+   imageLink.download = chartId + '.png';
+   imageLink.click(); // Trigger download
+    }
+
+
+   </script>
+  
+</body>
+</html>

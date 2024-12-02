@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>CS IA</title>
+  
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+   <style>
+      
+   body {
+       font-family: Arial, sans-serif;
+       background-color: #f4f4f9;
+       margin: 0;
+       padding: 0;
+   }
+
+
+   div {
+       background-color: #ffffff;
+       margin: 20px;
+       padding: 20px;
+       border-radius: 8px;
+       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   }
+
+
+   p {
+       font-size: 1.2rem;
+       font-weight: bold;
+       color: #333;
+   }
+
+
+   input, select {
+       width: 100%;
+       padding: 10px;
+       margin: 10px 0;
+       border: 1px solid #ccc;
+       border-radius: 4px;
+       box-sizing: border-box;
+       font-size: 1rem;
+   }
+
+
+   button {
+       background-color: #4CAF50;
+       color: white;
+       border: none;
+       padding: 10px 20px;
+       font-size: 1rem;
+       cursor: pointer;
+       border-radius: 4px;
+       width: 100%;
+       transition: background-color 0.3s;
+   }
+
+
+   button:hover {
+       background-color: #45a049;
+   }
+
+
+   #answer1, #answer2, #answer3 {
+       margin-top: 10px;
+       font-size: 1.1rem;
+       font-weight: bold;
+       color: #333;
+   }
+
+
+   canvas {
+       margin-top: 20px;
+       display: block;
+       margin-left: auto;
+       margin-right: auto;
+       border-radius: 8px;
+       background-color: #eaeaea;
+       width: 90%; 
+       height: 200px;
+
+
+   select {
+       width: 100%;
+   }
+   }
+</style>
+
+
+ 
+</head>
+<body>
+
+
+
+
+   <div class="container">
+       <h1>Choose a Physics Solver</h1>
+
+
+       <div class="formula-solver">
+          
+           <div class="solver">
+               <h3>Kinematics Solver</h3>
+               <p>Calculate velocity, displacement, acceleration, and more.</p>
+               <a href="kinematics.html" class="button">Go to Solver</a>
+           </div>
+
+
+          
+           <div class="solver">
+               <h3>Force Solver</h3>
+               <p>Calculate forces using Newton's laws.</p>
+               <a href="force.html" class="button">Go to Solver</a>
+           </div>
+
+
+
+
+           <div class="solver">
+               <h3>Energy Solver</h3>
+               <p>Calculate kinetic energy, potential energy, and more.</p>
+               <a href="energy.html" class="button">Go to Solver</a>
+           </div>
+
+
+<script>
+   /*
+class VelocityEquation {
+   constructor(u, a, t, v) {
+       this.u = u;
+       this.a = a;
+       this.t = t;
+       this.v = v;
+   }
+
+
+   solve() {
+       if (this.v === null) {
+           return "Final velocity (v) is " + (this.u + this.a * this.t) + " m/s";
+       } else if (this.u === null) {
+           return "Initial velocity (u) is " + (this.v - this.a * this.t) + " m/s";
+       } else if (this.a === null) {
+           return "Acceleration (a) is " + ((this.v - this.u) / this.t) + " m/s²";
+       } else if (this.t === null) {
+           return "Time (t) is " + ((this.v - this.u) / this.a) + " s";
+       } else {
+           return "Error: Please enter valid inputs.";
+       }
+   }
+
+
+   plotGraph() {
+       const timeValues = [];
+       const velocityValues = [];
+
+
+       for (let t = 0; t <= 10; t += 0.5) {
+           timeValues.push(t);
+           velocityValues.push(this.u + this.a * t);
+       }
+
+
+       const ctx = document.getElementById('velocityChart').getContext('2d');
+       new Chart(ctx, {
+           type: 'line',
+           data: {
+               labels: timeValues,
+               datasets: [{
+                   label: 'Final Velocity vs Time',
+                   data: velocityValues,
+                   borderColor: 'black',
+                   fill: false
+               }]
+           }
+       });
+   }
+}
+
+
+function solveFirstEquation() {
+   const u = parseFloat(document.getElementById("u1").value) || null;
+   const a = parseFloat(document.getElementById("a1").value) || null;
+   const t = parseFloat(document.getElementById("t1").value) || null;
+   const v = parseFloat(document.getElementById("v1").value) || null;
+
+
+   const velocityEquation = new VelocityEquation(u, a, t, v);
+   const answer = velocityEquation.solve();
+   document.getElementById("answer1").innerHTML = answer;
+   velocityEquation.plotGraph();
+}
+
+
+class DisplacementEquation {
+   constructor(u, a, t, s) {
+       this.u = u;
+       this.a = a;
+       this.t = t;
+       this.s = s;
+   }
+
+
+   solve() {
+       if (this.s === null) {
+           return "Displacement (s) is " + (this.u * this.t + 0.5 * this.a * this.t * this.t).toFixed(2) + " m";
+       } else if (this.u === null) {
+           return "Initial velocity (u) is " + ((this.s - 0.5 * this.a * this.t * this.t) / this.t).toFixed(2) + " m/s";
+       } else if (this.a === null) {
+           return "Acceleration (a) is " + (2 * (this.s - this.u * this.t) / (this.t * this.t)).toFixed(2) + " m/s²";
+       } else if (this.t === null) {
+           const discriminant = this.u * this.u - 2 * this.a * this.s;
+           if (discriminant < 0) {
+               return "No real solutions for time.";
+           } else {
+               const t1 = (-this.u + Math.sqrt(discriminant)) / this.a;
+               const t2 = (-this.u - Math.sqrt(discriminant)) / this.a;
+               return `Time has two possible values: ${t1.toFixed(2)} s and ${t2.toFixed(2)} s`;
+           }
+       } else {
+           return "Error: Please enter valid inputs.";
+       }
+   }
+
+
+   plotGraph() {
+       const timeValues = [];
+       const displacementValues = [];
+
+
+       for (let t = 0; t <= 10; t += 0.5) {
+           timeValues.push(t);
+           displacementValues.push(this.u * t + 0.5 * this.a * t * t);
+       }
+
+
+       const ctx = document.getElementById('displacementChart').getContext('2d');
+       new Chart(ctx, {
+           type: 'line',
+           data: {
+               labels: timeValues,
+               datasets: [{
+                   label: 'Displacement vs Time',
+                   data: displacementValues,
+                   borderColor: 'red',
+                   fill: false
+               }]
+           }
+       });
+   }
+}
+
+
+function solveSecondEquation() {
+   const u = parseFloat(document.getElementById("u2").value) || null;
+   const a = parseFloat(document.getElementById("a2").value) || null;
+   const t = parseFloat(document.getElementById("t2").value) || null;
+   const s = parseFloat(document.getElementById("s2").value) || null;
+
+
+   const displacementEquation = new DisplacementEquation(u, a, t, s);
+   const answer = displacementEquation.solve();
+   document.getElementById("answer2").innerHTML = answer;
+   displacementEquation.plotGraph();
+}
+
+
+function solveThirdEquation() {
+   const f = parseFloat(document.getElementById("f3").value) || null;
+   const m = parseFloat(document.getElementById("m3").value) || null;
+   const a = parseFloat(document.getElementById("a3").value) || null;
+
+
+   const forceEquation = new ForceEquation(f, m, a);
+   const answer = forceEquation.solve();
+   document.getElementById("answer3").innerHTML = answer;
+   forceEquation.plotGraph();
+}
+
+
+class ForceEquation {
+   constructor(f, m, a) {
+       this.f = f;
+       this.m = m;
+       this.a = a;
+   }
+
+
+   solve() {
+       if (this.f === null) {
+           return "Force (F) is " + (this.m * this.a).toFixed(2) + " N";
+       } else if (this.m === null) {
+           return "Mass (m) is " + (this.f / this.a).toFixed(2) + " kg";
+       } else if (this.a === null) {
+           return "Acceleration (a) is " + (this.f / this.m).toFixed(2) + " m/s²";
+       } else {
+           return "Error: Please enter valid inputs.";
+       }
+   }
+
+
+   plotGraph() {
+       const massValues = [];
+       const forceValues = [];
+
+
+       for (let m = 1; m <= 10; m++) {
+           massValues.push(m);
+           forceValues.push(m * this.a);
+       }
+
+
+       const ctx = document.getElementById('forceChart').getContext('2d');
+       new Chart(ctx, {
+           type: 'line',
+           data: {
+               labels: massValues,
+               datasets: [{
+                   label: 'Force vs Mass',
+                   data: forceValues,
+                   borderColor: 'blue',
+                   fill: false
+               }]
+           }
+       });
+   }
+}
+*/
+</script>
+
+
+<script src="equation.js"></script>
+</body>
+</html>

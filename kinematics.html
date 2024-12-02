@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Kinematics</title>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+
+   <div>
+       <p>Kinematics Solver: v = u + at</p>
+       <select id="choose1">
+           <option value="v">Final velocity (v)</option>
+           <option value="u">Initial velocity (u)</option>
+           <option value="a">Acceleration (a)</option>
+           <option value="t">Time (t)</option>
+       </select>
+       <input type="number" id="u1" placeholder="initial velocity">
+       <input type="number" id="v1" placeholder="final velocity">
+       <input type="number" id="a1" placeholder="acceleration">
+       <input type="number" id="t1" placeholder="time">
+       <button onclick="solveFirstEquation()">SOLVE</button>
+       <div id="answer1"></div>
+       <canvas id="velocityChart" width="550" height="350"></canvas>
+       <button onclick="downloadChart('velocityChart')"> Download Chart</button>
+   </div>
+  
+  
+   <div>
+       <p>Kinematics Solver: s = ut + 1/2 at^2</p>
+       <select id="choose2">
+           <option value="s">Displacement (s)</option>
+           <option value="u">Initial velocity (u)</option>
+           <option value="a">Acceleration (a)</option>
+           <option value="t">Time (t)</option>
+       </select>
+       <input type="number" id="u2" placeholder="initial velocity">
+       <input type="number" id="a2" placeholder="acceleration">
+       <input type="number" id="t2" placeholder="time">
+       <input type="number" id="s2" placeholder="displacement">
+       <button onclick="solveSecondEquation()">SOLVE</button>
+       <div id="answer2"></div>
+       <canvas id="displacementChart" width="550" height="350"></canvas>
+       <button onclick="downloadChart('displacementChart')"> Download Chart</button>
+   </div>
+
+
+  
+   <script src="equation.js"></script>
+   <script>
+    function downloadChart(chartId) {
+   const chartCanvas = document.getElementById(chartId);
+   const imageLink = document.createElement('a');
+   imageLink.href = chartCanvas.toDataURL('image/png'); // Convert to base64 image URL
+   imageLink.download = chartId + '.png';
+   imageLink.click(); // Trigger download
+    }
+
+
+   </script>
+  
+</body>
+</html>
